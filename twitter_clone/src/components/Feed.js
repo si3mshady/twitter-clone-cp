@@ -9,7 +9,9 @@ export default function Feed() {
     const [newPost, setNewPosts] = useState({})
 
     useEffect(() => {
-        const url = "http://localhost:9000/v1/twitter/posts"
+        const url = process.env.REACT_APP_GET_POSTS
+        
+        // const url = "http://localhost:9000/v1/twitter/posts"
         
         Axios.get(url).then(post => { 
             

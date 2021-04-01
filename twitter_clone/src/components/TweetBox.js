@@ -20,10 +20,12 @@ export default function TweetBox({setNewPosts}) {
 
 
        
-
-        const url = "http://localhost:9000/v1/twitter/addPost"
+        const url = process.env.REACT_APP_ADD_POST
+        // const url = "http://localhost:9000/v1/twitter/addPost"
+        console.log(url)
         Axios.post(url, post).then(data => 
-            setNewPosts(data)
+            {console.log('clicked')
+            setNewPosts(data)}
             
             )
 
@@ -58,8 +60,8 @@ export default function TweetBox({setNewPosts}) {
                          
                 <Button 
                 type="submit"
-                onClick={sendTweet}
-                variant="outlined" className="tweetBox__tweetButton"     >Tweet</Button>
+                onClick={(e) => { console.log('clicked');    sendTweet(e)}}
+                variant="outlined" className="tweetBox__tweetButton" >Tweet</Button>
             </form>
             
         </div>

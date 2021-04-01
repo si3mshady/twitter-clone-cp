@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose';
 import postModel from './models/postModel.js'; 
-import starterData from './starterData.js'
+// import starterData from './starterData.js'
 // app config 
 import cors from 'cors';
 const app=express();
@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cors())
 
-// const connection = "mongodb://db:27017/twitter";
-const connection = "mongodb://localhost:27017/twitter";
+const connection = process.env.MONGO_CONNECT_URL
+// const connection = "mongodb://localhost:27017/twitter";
 mongoose.connect(connection, {
  
     useNewUrlParser: true,
@@ -30,21 +30,21 @@ mongoose.connect(connection, {
 });
 
 
-starterData.forEach((newPost) => {
+// starterData.forEach((newPost) => {
 
-    postModel.create(newPost, (err, data) => {
-        if (!err) {          
-            console.log('Starter Data Loaded Successful')
-            console.log(newPost)             
+//     postModel.create(newPost, (err, data) => {
+//         if (!err) {          
+//             console.log('Starter Data Loaded Successful')
+//             console.log(newPost)             
            
-        } else {
-            console.log('Post unsuccessful')
-            console.log(err)
-        }
-    })
+//         } else {
+//             console.log('Post unsuccessful')
+//             console.log(err)
+//         }
+//     })
 
 
-})
+// })
 
 
 

@@ -1,0 +1,29 @@
+version: "3.7"  #
+services:  
+  reactfrontend:
+    build: 
+      context: .
+      dockerfile: Dockerfile.frontend 
+    ports:
+      - "888:80"    #external:internal frontend 
+    depends_on:
+      - db
+  nodebackend:
+    build: 
+      context: ../server
+      dockerfile: Dockerfile.backend  
+    ports: 
+      - "9000:9000"    #external:internal 
+    depends_on:
+      - db   
+              
+  db:
+    volumes:
+      - /Users/ellarnol/localTwitterDB:/data/db
+    image: mongo:latest
+    ports:
+      - "27017:27017"             
+
+ # database connection url via mongoose "mongodb://db:27017/jl";
+  # netstat -an -ptcp | grep LISTEN  check for listening ports 
+  # docker rm $(docker ps -a -q) --force  - delete all containers - free up ports for dev environment

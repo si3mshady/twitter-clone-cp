@@ -1,0 +1,17 @@
+FROM node:alpine 
+WORKDIR /app
+
+COPY ./package*  ./
+RUN npm install  --force
+
+RUN mkdir models
+COPY ./models/postModel.js models/postModel.js
+COPY ./server.js ./server.js
+
+ENV MONGO_CONNECT_URL=mongodb://db:27017/twitter
+
+LABEL developer=si3mshady
+EXPOSE 9000
+CMD ["node", "server.js"]
+
+# docker build . -f Dockerfile.backend  -t si3mshady/twitterclone-be:1

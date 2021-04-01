@@ -1,0 +1,28 @@
+FROM node:alpine as multi-stage-build
+
+WORKDIR /app
+
+COPY ./package.json ./package.json
+COPY ./public ./public
+COPY ./src ./src
+COPY .env .env
+
+RUN npm install  --force
+RUN npm run build
+
+FROM nginx:latest
+
+LABEL developer=ElliottLamarArnold
+
+WORKDIR /usr/share/nginx/html
+
+COPY --from=multi-stage-build /app/build /usr/share/nginx/html
+
+
+ENV REACT_APP_GET_POSTS=http://localhost:9000/v1/twitter/posts
+
+ENV REACT_APP_ADD_POST=http://localhost:9000/v1/twitter/addPost
+
+EXPOSE 80
+
+# docker build . -f Dockerfile.frontend  -t si3mshady/twitter-fe:1
