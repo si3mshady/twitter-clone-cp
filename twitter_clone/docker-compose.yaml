@@ -23,7 +23,3 @@ services:
     image: mongo:latest
     ports:
       - "27017:27017"             
-
- # database connection url via mongoose "mongodb://db:27017/jl";
-  # netstat -an -ptcp | grep LISTEN  check for listening ports 
-  # docker rm $(docker ps -a -q) --force  - delete all containers - free up ports for dev environment

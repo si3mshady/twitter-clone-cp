@@ -19,10 +19,10 @@ WORKDIR /usr/share/nginx/html
 COPY --from=multi-stage-build /app/build /usr/share/nginx/html
 
 
-ENV REACT_APP_GET_POSTS=http://localhost:9000/v1/twitter/posts
+ENV REACT_APP_GET_POSTS=http://aa9dee70704264d31b311098b72bc84a-1006405884.us-east-2.elb.amazonaws.com:9000/v1/twitter/posts
 
-ENV REACT_APP_ADD_POST=http://localhost:9000/v1/twitter/addPost
+ENV REACT_APP_ADD_POST=http://aa9dee70704264d31b311098b72bc84a-1006405884.us-east-2.elb.amazonaws.com:9000/v1/twitter/addPost
 
 EXPOSE 80
 
-# docker build . -f Dockerfile.frontend  -t si3mshady/twitter-fe:1
+# docker build . -f Dockerfile.frontend  -t si3mshady/twitterclone-fe:1
